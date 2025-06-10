@@ -11,21 +11,21 @@ package Model;
 public class ChiTIetSP {
     private int maCTSP;
     private int maSP;
-    private String mauSac;
     private String kichThuoc;
-    private int soLuong;
+    private String mauSac;
     private double gia;
+    private int soLuong;
 
     public ChiTIetSP() {
     }
 
-    public ChiTIetSP(int maCTSP, int maSP, String mauSac, String kichThuoc, int soLuong, double gia) {
+    public ChiTIetSP(int maCTSP, int maSP, String kichThuoc, String mauSac, double gia, int soLuong) {
         this.maCTSP = maCTSP;
         this.maSP = maSP;
-        this.mauSac = mauSac;
         this.kichThuoc = kichThuoc;
-        this.soLuong = soLuong;
+        this.mauSac = mauSac;
         this.gia = gia;
+        this.soLuong = soLuong;
     }
 
     public int getMaCTSP() {
@@ -44,6 +44,14 @@ public class ChiTIetSP {
         this.maSP = maSP;
     }
 
+    public String getKichThuoc() {
+        return kichThuoc;
+    }
+
+    public void setKichThuoc(String kichThuoc) {
+        this.kichThuoc = kichThuoc;
+    }
+
     public String getMauSac() {
         return mauSac;
     }
@@ -52,12 +60,12 @@ public class ChiTIetSP {
         this.mauSac = mauSac;
     }
 
-    public String getKichThuoc() {
-        return kichThuoc;
+    public double getGia() {
+        return gia;
     }
 
-    public void setKichThuoc(String kichThuoc) {
-        this.kichThuoc = kichThuoc;
+    public void setGia(double gia) {
+        this.gia = gia;
     }
 
     public int getSoLuong() {
@@ -68,13 +76,5 @@ public class ChiTIetSP {
         this.soLuong = soLuong;
     }
 
-    public double getGia() {
-        return gia;
-    }
-
-    public void setGia(double gia) {
-        this.gia = gia;
-    }
-    
     
 }
