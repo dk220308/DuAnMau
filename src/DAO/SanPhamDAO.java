@@ -4,7 +4,6 @@
  */
 package DAO;
 
-import Model.KhachHang;
 import Model.SanPham;
 import Service.DBConnect;
 import java.sql.Connection;
