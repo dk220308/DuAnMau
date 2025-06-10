@@ -10,20 +10,18 @@ package Model;
  */
 public class ChiTietHD {
     private int maCTHD;
+    private int maSP;
     private int maHD;
-    private int maCTSP;
     private int soLuong;
-    private double donGia;
 
     public ChiTietHD() {
     }
 
-    public ChiTietHD(int maCTHD, int maHD, int maCTSP, int soLuong, double donGia) {
+    public ChiTietHD(int maCTHD, int maSP, int maHD, int soLuong) {
         this.maCTHD = maCTHD;
+        this.maSP = maSP;
         this.maHD = maHD;
-        this.maCTSP = maCTSP;
         this.soLuong = soLuong;
-        this.donGia = donGia;
     }
 
     public int getMaCTHD() {
@@ -34,20 +32,20 @@ public class ChiTietHD {
         this.maCTHD = maCTHD;
     }
 
+    public int getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(int maSP) {
+        this.maSP = maSP;
+    }
+
     public int getMaHD() {
         return maHD;
     }
 
     public void setMaHD(int maHD) {
         this.maHD = maHD;
-    }
-
-    public int getMaCTSP() {
-        return maCTSP;
-    }
-
-    public void setMaCTSP(int maCTSP) {
-        this.maCTSP = maCTSP;
     }
 
     public int getSoLuong() {
@@ -58,13 +56,5 @@ public class ChiTietHD {
         this.soLuong = soLuong;
     }
 
-    public double getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(double donGia) {
-        this.donGia = donGia;
-    }
-    
-    
+   
 }

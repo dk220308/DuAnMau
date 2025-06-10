@@ -9,25 +9,25 @@ package Model;
  * @author XPS
  */
 public class NhanVien {
-     private int maNV;
-    private String tenNV;
-    private String soDienThoai;
-    private String diaChi;
-    private String email;
-    private String chucVu;
+    private int maNV;
     private String tenTK;
+    private String tenNV;
+    private String chucVu;
+    private String soDienThoai;
+    private String email;
+    private String diaChi;
 
     public NhanVien() {
     }
 
-    public NhanVien(int maNV, String tenNV, String soDienThoai, String diaChi, String email, String chucVu, String tenTK) {
+    public NhanVien(int maNV, String tenTK, String tenNV, String chucVu, String soDienThoai, String email, String diaChi) {
         this.maNV = maNV;
-        this.tenNV = tenNV;
-        this.soDienThoai = soDienThoai;
-        this.diaChi = diaChi;
-        this.email = email;
-        this.chucVu = chucVu;
         this.tenTK = tenTK;
+        this.tenNV = tenNV;
+        this.chucVu = chucVu;
+        this.soDienThoai = soDienThoai;
+        this.email = email;
+        this.diaChi = diaChi;
     }
 
     public int getMaNV() {
@@ -38,36 +38,20 @@ public class NhanVien {
         this.maNV = maNV;
     }
 
+    public String getTenTK() {
+        return tenTK;
+    }
+
+    public void setTenTK(String tenTK) {
+        this.tenTK = tenTK;
+    }
+
     public String getTenNV() {
         return tenNV;
     }
 
     public void setTenNV(String tenNV) {
         this.tenNV = tenNV;
-    }
-
-    public String getSoDienThoai() {
-        return soDienThoai;
-    }
-
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
-    }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getChucVu() {
@@ -78,13 +62,32 @@ public class NhanVien {
         this.chucVu = chucVu;
     }
 
-    public String getTenTK() {
-        return tenTK;
+    public String getSoDienThoai() {
+        return soDienThoai;
     }
 
-    public void setTenTK(String tenTK) {
-        this.tenTK = tenTK;
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
     
     
+    
+
+   
 }
