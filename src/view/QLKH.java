@@ -9,7 +9,6 @@ import Model.KhachHang;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author mr
@@ -74,6 +73,88 @@ public class QLKH extends javax.swing.JPanel {
             return false;
         }
         return true;
+    }
+
+    public void showDetail() {
+        int i = jTable1.getSelectedRow();
+        if (i >= 0) {
+            KhachHang kh = khDao.getAll().get(i);
+            TF_MaKH.setText(String.valueOf(kh.getMaKH()));
+            TF_TenKH.setText(kh.getTenKH());
+            TF_SDT.setText(kh.getSoDienThoai());
+            TF_Email.setText(kh.getEmail());
+            TF_DiaChi.setText(kh.getDiaChi());
+        }
+    }
+
+    // Trong QLSPpanel.java
+    // Trong QLKH.java
+    public void sua() {
+        int i = jTable1.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn sửa",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_OPTION) {
+                KhachHang khcu = khDao.getAll().get(i);
+                int macu = khcu.getMaKH();
+
+                int makh = Integer.parseInt(TF_MaKH.getText());
+                String ten = TF_TenKH.getText();
+                String sdt = TF_SDT.getText();
+                String email = TF_Email.getText();
+                String dchi = TF_DiaChi.getText();
+
+                // Đã sửa cách khởi tạo KhachHang
+                KhachHang khmoi = new KhachHang(makh, ten, sdt, dchi, email);
+
+                int result = khDao.suaKH(khmoi, macu);
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn khách hàng để sửa");
+        }
+    }
+
+    public void xoa(){
+        int i = jTable1.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xoá",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_OPTION) {  // Đã sửa từ YES_NO_OPTION thành YES_OPTION
+                KhachHang khcu = khDao.getAll().get(i);
+                int result = khDao.xoaKH(khcu.getMaKH());
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xoá thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xoá thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn khách hàng để xoá");
+        }
+    }
+
+    public void them() {
+        int makh = Integer.parseInt(TF_MaKH.getText());
+        String ten = TF_TenKH.getText();
+        String sdt = TF_SDT.getText();
+        String email = TF_Email.getText();
+        String dchi = TF_DiaChi.getText();
+        KhachHang kh = new KhachHang(makh, ten, dchi, dchi, email);
+
+        int Result = khDao.themKH(kh);
+        if (Result == 1) {
+            fillTable();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
     }
 
     /**
@@ -156,6 +237,11 @@ public class QLKH extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -242,15 +328,29 @@ public class QLKH extends javax.swing.JPanel {
 
     private void Button_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_ThemActionPerformed
         // TODO add your handling code here:
+        if (validateForm()) {
+            them();
+        }
     }//GEN-LAST:event_Button_ThemActionPerformed
 
     private void Button_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_SuaActionPerformed
         // TODO add your handling code here:
+        if (validateForm()) {
+            sua();
+        }
     }//GEN-LAST:event_Button_SuaActionPerformed
 
     private void Button_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_XoaActionPerformed
         // TODO add your handling code here:
+        if (validateForm()) {
+            xoa();
+        }
     }//GEN-LAST:event_Button_XoaActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

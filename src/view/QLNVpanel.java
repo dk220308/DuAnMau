@@ -4,6 +4,7 @@
  */
 package view;
 
+import DAO.NhanVienDao;
 import Model.NhanVien;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class QLNVpanel extends javax.swing.JPanel {
 
     DefaultTableModel tableModel;
-//    NhanVienDao nvDao = new NhanVienDao();
+    NhanVienDao nvDao = new NhanVienDao();
 
     /**
      * Creates new form QLNVpanel
@@ -23,7 +24,7 @@ public class QLNVpanel extends javax.swing.JPanel {
     public QLNVpanel() {
         initComponents();
         initTable();
-//        fillTable();
+        fillTable();
     }
 
     public void initTable() {
@@ -33,12 +34,12 @@ public class QLNVpanel extends javax.swing.JPanel {
         tbQLNV.setModel(tableModel);
     }
 
-//    public void fillTable() {
-//        tableModel.setRowCount(0);
-//        for (NhanVien nv : nvDao.getAll()) {
-//            tableModel.addRow(nvDao.getRow(nv));
-//        }
-//    }
+    public void fillTable() {
+        tableModel.setRowCount(0);
+        for (NhanVien nv : nvDao.getAll()) {
+            tableModel.addRow(nvDao.getRow(nv));
+        }
+    }
     private boolean validateForm() {
         if (TF_Manv.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mã nhân viên.");
@@ -78,7 +79,34 @@ public class QLNVpanel extends javax.swing.JPanel {
 
         return true;
     }
+    
+    public void showDetail(){
+        int i = tbQLNV.getSelectedRow();
+        if(i >= 0) {
+            NhanVien nv = nvDao.getAll().get(i);
+            TF_Manv.setText(String.valueOf(nv.getMaNV()));
+            TF_Tennv.setText(nv.getTenNV());
+            TF_ChucVu.setText(nv.getChucVu());
+            TF_SDTNV.setText(nv.getSoDienThoai());
+            TF_Email.setText(nv.getEmail());
+            TF_DiaChi.setText(nv.getDiaChi());
+        }
+    }
 
+//    public void showDetail() {
+//        int i = tb.getSelectedRow();
+//        if (i >= 0) {
+//            SanPham sp = spdao.getALL().get(i);
+//            txtma.setText(String.valueOf(sp.getMa()));
+//            txtten.setText(sp.getTen());
+//            txtgiaban.setText(String.valueOf(sp.getGia()));
+//            if (sp.getTrangThai().equals("Còn hàng")) {
+//                rdoconhang.setSelected(true);
+//            } else {
+//                rdohethang.setSelected(true);
+//            }
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,6 +192,11 @@ public class QLNVpanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbQLNV.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbQLNVMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbQLNV);
 
         lbTNV1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -274,6 +307,11 @@ public class QLNVpanel extends javax.swing.JPanel {
     private void TF_ManvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TF_ManvActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TF_ManvActionPerformed
+
+    private void tbQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLNVMouseClicked
+        // TODO add your handling code here:
+        showDetail();
+    }//GEN-LAST:event_tbQLNVMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

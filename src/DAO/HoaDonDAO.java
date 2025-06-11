@@ -29,9 +29,9 @@ public class HoaDonDAO {
             pstm.setInt(1, hd.getMaHD());
             pstm.setInt(2, hd.getMaKH());
             pstm.setInt(3, hd.getMaNV());
-            pstm.setDate(4,hd.getNgayLap());
-            pstm.setDouble(5, hd.getTongTien());
-            pstm.setString(6, hd.getTrangThai());
+            pstm.setDate(4, hd.getNgayLap());
+            pstm.setString(5, hd.getTrangThai());
+            pstm.setDouble(6, hd.getTongTien());    
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -47,8 +47,8 @@ public class HoaDonDAO {
                 + "MaNV = ?,\n"
                 + "NgayLap= ?, \n"
                 + "TrangThai= ?, \n"
-                + "TongTien= ?";
-
+                + "TongTien= ?"
+                + "WHERE MaHD = ?";
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
@@ -56,8 +56,8 @@ public class HoaDonDAO {
             pstm.setInt(2, hd.getMaKH());
             pstm.setInt(3, hd.getMaNV());
             pstm.setDate(4, hd.getNgayLap());
-            pstm.setDouble(5, hd.getTongTien());
-            pstm.setString(6, hd.getTrangThai());
+            pstm.setString(5, hd.getTrangThai());
+            pstm.setDouble(6, hd.getTongTien());          
             pstm.setInt(7, maHD);
             if (pstm.executeUpdate() > 0) {
                 return 1;
@@ -87,16 +87,17 @@ public class HoaDonDAO {
         int maKH = hd.getMaKH();
         int maNV = hd.getMaNV();
         Date ngayLap = hd.getNgayLap();
-        double tongTien = hd.getTongTien();
         String trangThai = hd.getTrangThai();
+        double tongTien = hd.getTongTien();
+        
 
-        Object[] row = new Object[]{maHD, maKH, maNV, ngayLap, tongTien, trangThai};
+        Object[] row = new Object[]{maHD, maKH, maNV, ngayLap, trangThai, tongTien};
         return row;
     }
 
     public List<HoaDon> getAll() {
         List<HoaDon> listHD = new ArrayList<>();
-        String sql = "SELECT * FROM HoaDon";
+        String sql = "select * from HoaDon";
         try {
             Connection con = DBConnect.getConnection();
             Statement stm = con.createStatement();
@@ -106,10 +107,9 @@ public class HoaDonDAO {
                 int maKH = rs.getInt(2);
                 int maNV = rs.getInt(3);
                 Date ngayLap = rs.getDate(4);
-                double tongTien = rs.getDouble(5);
-                String trangThai = rs.getString(6);
-
-                HoaDon hd = new HoaDon(maHD, maKH, maNV, ngayLap, tongTien, trangThai);
+                String trangThai = rs.getString(5);
+                double tongTien = rs.getDouble(6);              
+                HoaDon hd = new HoaDon(maHD, maKH, maNV, ngayLap, trangThai, tongTien);
                 listHD.add(hd);
             }
         } catch (Exception ex) {

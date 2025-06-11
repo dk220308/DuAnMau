@@ -18,7 +18,7 @@ import java.util.List;
  * @author XPS
  */
 public class KhachHangDao {
-    
+
     public int themKH(KhachHang kh) {
         String sql = "INSERT INTO KhachHang (MaKH, TenKH, SDT, DiaChi, EMAIL) VALUES (?, ?, ?, ?, ?)";
 
@@ -27,7 +27,7 @@ public class KhachHangDao {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, kh.getMaKH());
             pstm.setString(2, kh.getTenKH());
-            pstm.setString(3,kh.getSoDienThoai());
+            pstm.setString(3, kh.getSoDienThoai());
             pstm.setString(4, kh.getDiaChi());
             pstm.setString(5, kh.getEmail());
             if (pstm.executeUpdate() > 0) {
@@ -37,32 +37,36 @@ public class KhachHangDao {
         }
         return 0;
     }
-    
+
+    // Trong KhachHangDao.java
     public int suaKH(KhachHang kh, int ma) {
         String sql = "update KhachHang set\n"
                 + "MaKH = ?,\n"
                 + "TenKH = ?,\n"
                 + "SDT = ?,\n"
-                + "DiaChi= ?\n"
-                + "EMAIL = ?";
+                + "DiaChi = ?,\n"
+                + "EMAIL = ?\n"
+                + "WHERE MaKH = ?";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, kh.getMaKH());
             pstm.setString(2, kh.getTenKH());
-            pstm.setString(3,kh.getSoDienThoai());
+            pstm.setString(3, kh.getSoDienThoai());
             pstm.setString(4, kh.getDiaChi());
             pstm.setString(5, kh.getEmail());
-            pstm.setInt(5, ma);
+            pstm.setInt(6, ma);  // Đã sửa từ setInt(5, ma) thành setInt(6, ma)
+
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
         } catch (Exception ex) {
+            ex.printStackTrace(); // Thêm dòng này để debug
         }
         return 0;
     }
-    
+
     public int xoaKH(int ma) {
         String sql = "delete KhachHang where MaKH = ?";
 

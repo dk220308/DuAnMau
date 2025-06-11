@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class SanPhamDAO {
 
-    public int themKH(SanPham sp) {
+    public int themSP(SanPham sp) {
         String sql = "INSERT INTO SanPham (MaSP, TenSP, MoTa, TrangThai) VALUES (?, ?, ?, ?)";
 
         try {
@@ -37,12 +37,14 @@ public class SanPhamDAO {
         return 0;
     }
 
-    public int suaKH(SanPham sp, int maSP) {
+    // Trong SanPhamDAO.java
+    public int suaSP(SanPham sp, int maSP) {
         String sql = "update SanPham set\n"
                 + "MaSP = ?,\n"
                 + "TenSP = ?,\n"
                 + "MoTa = ?,\n"
-                + "TrangThai= ?";
+                + "TrangThai = ?\n" // Đã bỏ dấu phẩy thừa và thêm \n
+                + "WHERE MaSP = ?";    // Thêm khoảng trắng trước WHERE
 
         try {
             Connection con = DBConnect.getConnection();
@@ -56,11 +58,12 @@ public class SanPhamDAO {
                 return 1;
             }
         } catch (Exception ex) {
+            ex.printStackTrace(); // Nên in ra lỗi để debug
         }
         return 0;
     }
 
-    public int xoaKH(int maSP) {
+    public int xoaSP(int maSP) {
         String sql = "delete SanPham where MaSP = ?";
 
         try {
