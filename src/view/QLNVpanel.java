@@ -29,7 +29,7 @@ public class QLNVpanel extends javax.swing.JPanel {
     }
 
     public void initTable() {
-        String[] cols = new String[]{"Mã NV", "Tên NV", "Tuổi NV", "SĐT NV",};
+        String[] cols = new String[]{"Mã NV", "Tên tài khoản", "Tên NV", "Chức vụ", "Tuổi NV", "SĐT NV",};
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(cols);
         tbQLNV.setModel(tableModel);
@@ -113,7 +113,7 @@ public class QLNVpanel extends javax.swing.JPanel {
                 String email = TF_Email.getText();
                 String dchi = TF_DiaChi.getText();
 
-                NhanVien nvmoi = new NhanVien(manv, tentk, tennv, chucvu, dchi, email, dchi);
+                NhanVien nvmoi = new NhanVien(manv, tentk, tennv, chucvu, sdt, email, dchi);
                 int result = nvDao.suaNV(nvmoi, macu);
                 if (result == 1) {
                     fillTable();
@@ -136,7 +136,7 @@ public class QLNVpanel extends javax.swing.JPanel {
         String email = TF_Email.getText();
         String dchi = TF_DiaChi.getText();
 
-        NhanVien nv = new NhanVien(manv, tentk, tennv, chucvu, dchi, email, dchi);
+        NhanVien nv = new NhanVien(manv, tentk, tennv, chucvu, sdt, email, dchi);
 
         int Result = nvDao.themCTHD(nv);
         if (Result == 1) {
