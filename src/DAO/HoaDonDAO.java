@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class HoaDonDAO {
             pstm.setInt(1, hd.getMaHD());
             pstm.setInt(2, hd.getMaKH());
             pstm.setInt(3, hd.getMaNV());
-            pstm.setDate(4, hd.getNgayLap());
+            pstm.setDate(4,hd.getNgayLap());
             pstm.setDouble(5, hd.getTongTien());
             pstm.setString(6, hd.getTrangThai());
             if (pstm.executeUpdate() > 0) {

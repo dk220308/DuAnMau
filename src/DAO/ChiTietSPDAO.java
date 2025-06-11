@@ -5,6 +5,7 @@
 package DAO;
 
 import Model.ChiTIetSP;
+import Model.NhanVien;
 import Service.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import Model.ChiTietHD;
 import Model.NhanVien;
 import Service.DBConnect;
 import java.sql.Connection;
@@ -85,7 +86,7 @@ public class NhanVienDao {
         String sdt = nv.getSoDienThoai();
         String dchi = nv.getDiaChi();
         String email = nv.getEmail();
-        String chucvu = nv.getChucVu()
+        String chucvu = nv.getChucVu();
         String tenTK = nv.getTenTK();
 
         Object[] row = new Object[]{maNV, tenNV, sdt, dchi, email, chucvu, tenTK};
@@ -107,7 +108,7 @@ public class NhanVienDao {
                 String sdt = rs.getString(5);
                 String email = rs.getString(6);
                 String dchi = rs.getString(7);
-                NhanVien nv = new NhanVien(maNV, tenTK, tenNV, chucvu, dchi, email, dchi)
+                NhanVien nv = new NhanVien(maNV, tenTK, tenNV, chucvu, dchi, email, dchi);
                 listnv.add(nv);
             }
         } catch (Exception ex) {

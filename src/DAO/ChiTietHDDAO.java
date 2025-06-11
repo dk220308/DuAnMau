@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import Model.HoaDon;
 
 /**
  *
@@ -100,11 +101,11 @@ public class ChiTietHDDAO {
                 int maHD = rs.getInt(3);
                 int soLuong = rs.getInt(4);
                 ChiTietHD cthd = new ChiTietHD(maCTHD, maSP, maHD, soLuong);
-                listHD.add(hd);
+                listCTHD.add(cthd);
             }
         } catch (Exception ex) {
         }
 
-        return listHD;
+        return listCTHD;
     }
 }
