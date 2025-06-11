@@ -102,7 +102,7 @@ public class KhachHangDao {
                 String sdt = rs.getString(3);
                 String dchi = rs.getString(4);
                 String email = rs.getString(5);
-                KhachHang kh = new KhachHang(maKH, tenKH, dchi, dchi, email);
+                KhachHang kh = new KhachHang(maKH, tenKH, sdt, dchi, email);
                 listkh.add(kh);
             }
         } catch (Exception ex) {

@@ -20,20 +20,20 @@ import java.util.List;
  */
 public class NhanVienDao {
 
-    public int themCTHD(NhanVien nv) {
+   public int themCTHD(NhanVien nv) {
         String sql = "INSERT INTO NhanVien (MaNV, TenTK, HoTen, ChucVu, SDT, Email, DiaChi) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, nv.getMaNV());
-            pstm.setString(2, nv.getTenNV());
-            pstm.setString(3, nv.getSoDienThoai());
-            pstm.setString(4, nv.getDiaChi());
-            pstm.setString(5, nv.getEmail());
-            pstm.setString(6, nv.getChucVu());
-            pstm.setString(7, nv.getTenTK());
-            
+            pstm.setString(2, nv.getTenTK());
+            pstm.setString(3, nv.getTenNV());
+            pstm.setString(4, nv.getChucVu());
+            pstm.setString(5, nv.getSoDienThoai());
+            pstm.setString(6, nv.getEmail());
+            pstm.setString(7, nv.getDiaChi());
+
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -42,21 +42,27 @@ public class NhanVienDao {
         return 0;
     }
 
-    public int suaCTHD(ChiTietHD cthd, int maCTHD) {
-        String sql = "update ChiTietHoaDon set\n"
-                + "MaCTHD = ?,\n"
-                + "MaSP = ?,\n"
-                + "MaHD = ?,\n"
-                + "SoLuong= ?";
+    public int suaNV(NhanVien nv, int maNV) {
+        String sql = "update NhanVien set\n"
+                + "MaNV = ?,\n"
+                + "TenTK = ?,\n"
+                + "HoTen = ?,\n"
+                + "ChucVu= ?,\n"
+                + "SDT= ?,\n"
+                + "Email= ?,\n"
+                + "DiaChi= ?";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setInt(1, cthd.getMaCTHD());
-            pstm.setInt(2, cthd.getMaSP());
-            pstm.setInt(3, cthd.getMaHD());
-            pstm.setInt(4, cthd.getSoLuong());
-            pstm.setInt(5, maCTHD);
+            pstm.setInt(1, nv.getMaNV());
+            pstm.setString(2, nv.getTenTK());
+            pstm.setString(3, nv.getTenNV());
+            pstm.setString(4, nv.getChucVu());
+            pstm.setString(5, nv.getSoDienThoai());
+            pstm.setString(6, nv.getEmail());
+            pstm.setString(7, nv.getDiaChi());
+            pstm.setInt(8, maNV);
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -65,13 +71,13 @@ public class NhanVienDao {
         return 0;
     }
 
-    public int xoaCTHD(int maCTHD) {
-        String sql = "delete ChiTietHoaDon where MaCTHD = ?";
+    public int xoaNV(int maNV) {
+        String sql = "delete NhanVien where MaNV = ?";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setInt(1, maCTHD);
+            pstm.setInt(1, maNV);
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -82,14 +88,14 @@ public class NhanVienDao {
 
     public Object[] getRow(NhanVien nv) {
         int maNV = nv.getMaNV();
-        String tenNV = nv.getTenNV();
-        String sdt = nv.getSoDienThoai();
-        String dchi = nv.getDiaChi();
-        String email = nv.getEmail();
-        String chucvu = nv.getChucVu();
         String tenTK = nv.getTenTK();
+        String tenNV = nv.getTenNV();
+        String chucvu = nv.getChucVu();
+        String sdt = nv.getSoDienThoai();
+        String email = nv.getEmail();
+        String dchi = nv.getDiaChi();
 
-        Object[] row = new Object[]{maNV, tenNV, sdt, dchi, email, chucvu, tenTK};
+        Object[] row = new Object[]{maNV, tenTK, tenNV, chucvu, sdt, email, dchi};
         return row;
     }
 
@@ -108,7 +114,7 @@ public class NhanVienDao {
                 String sdt = rs.getString(5);
                 String email = rs.getString(6);
                 String dchi = rs.getString(7);
-                NhanVien nv = new NhanVien(maNV, tenTK, tenNV, chucvu, dchi, email, dchi);
+                NhanVien nv = new NhanVien(maNV, tenTK, tenNV, chucvu, sdt, email, dchi);
                 listnv.add(nv);
             }
         } catch (Exception ex) {

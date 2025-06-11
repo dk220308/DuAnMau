@@ -19,14 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class QLHD extends javax.swing.JPanel {
   DefaultTableModel tableModel;
     HoaDonDAO hdDao = new HoaDonDAO();
-//    HoaDonDao hdDao = new HoaDonDao();
+
     /**
      * Creates new form QLHD
      */
     public QLHD() {
         initComponents();
         initTable();
-//        fillTable();
+        fillTable();
     }
  
     public void initTable() {

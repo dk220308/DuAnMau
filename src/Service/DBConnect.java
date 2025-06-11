@@ -15,9 +15,9 @@ import java.sql.SQLException;
 public class DBConnect {
      public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "DuAnMau";
+    public static final String DBNAME = "QLQA1";
     public static final String USERNAME = "sa";
-    public static final String PASSWORD = "123456789";
+    public static final String PASSWORD = "1234";
 
     /**
      * Get connection to MSSQL Server

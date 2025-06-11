@@ -20,19 +20,18 @@ import java.util.List;
  */
 public class ChiTietSPDAO {
 
-    public int themCTHD(NhanVien nv) {
-        String sql = "INSERT INTO NhanVien (MaNV, TenTK, HoTen, ChucVu, SDT, Email, DiaChi) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public int themCTHD(ChiTIetSP ctsp) {
+        String sql = "INSERT INTO ChiTietSanPham (MaCTSP, MaSP, Size, MauSac, Gia, SoLuongTon) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setInt(1, nv.getMaNV());
-            pstm.setString(2, nv.getTenNV());
-            pstm.setString(3, nv.getSoDienThoai());
-            pstm.setString(4, nv.getDiaChi());
-            pstm.setString(5, nv.getEmail());
-            pstm.setString(6, nv.getChucVu());
-            pstm.setString(7, nv.getTenTK());
+            pstm.setInt(1, ctsp.getMaCTSP());
+            pstm.setInt(2, ctsp.getMaSP());
+            pstm.setString(3, ctsp.getKichThuoc());
+            pstm.setString(4, ctsp.getMauSac());
+            pstm.setDouble(5, ctsp.getGia());
+            pstm.setInt(6, ctsp.getSoLuong());
 
             if (pstm.executeUpdate() > 0) {
                 return 1;
@@ -43,7 +42,7 @@ public class ChiTietSPDAO {
     }
 
     public int suaCTHD(ChiTIetSP ctsp, int maCTSP) {
-        String sql = "update ChiTietHoaDon set\n"
+        String sql = "update ChiTietSanPham set\n"
                 + "MaCTSP = ?,\n"
                 + "MaSP = ?,\n"
                 + "Size = ?,\n"
@@ -96,7 +95,7 @@ public class ChiTietSPDAO {
     }
 
     public List<ChiTIetSP> getAll() {
-        List<ChiTIetSP> listsp = new ArrayList<>();
+        List<ChiTIetSP> listctsp = new ArrayList<>();
         String sql = "SELECT * FROM ChiTietSanPham";
         try {
             Connection con = DBConnect.getConnection();
@@ -110,11 +109,11 @@ public class ChiTietSPDAO {
                 double gia = rs.getDouble(5);
                 int soLuong = rs.getInt(6);
                 ChiTIetSP ctsp = new ChiTIetSP(maCTSP, maSP, kichThuoc, mauSac, gia, soLuong);
-                listsp.add(ctsp);
+                listctsp.add(ctsp);
             }
         } catch (Exception ex) {
         }
 
-        return listsp;
+        return listctsp;
     }
 }
