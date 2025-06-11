@@ -13,15 +13,17 @@ public class ChiTietHD {
     private int maSP;
     private int maHD;
     private int soLuong;
+    private float giaBan;
 
     public ChiTietHD() {
     }
 
-    public ChiTietHD(int maCTHD, int maSP, int maHD, int soLuong) {
+    public ChiTietHD(int maCTHD, int maSP, int maHD, int soLuong, float giaBan) {
         this.maCTHD = maCTHD;
         this.maSP = maSP;
         this.maHD = maHD;
         this.soLuong = soLuong;
+        this.giaBan = giaBan;
     }
 
     public int getMaCTHD() {
@@ -56,5 +58,13 @@ public class ChiTietHD {
         this.soLuong = soLuong;
     }
 
-   
+    public float getGiaBan() {
+        return giaBan;
+    }
+
+    public void setGiaBan(float giaBan) {
+        this.giaBan = giaBan;
+    }
+
+    
 }

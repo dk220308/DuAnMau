@@ -22,7 +22,7 @@ import Model.HoaDon;
 public class ChiTietHDDAO {
 
     public int themCTHD(ChiTietHD cthd) {
-        String sql = "INSERT INTO ChiTietHoaDon (MaCTHD, MaSP, MaHD, SoLuong) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO ChiTietHoaDon (MaCTHD, MaSP, MaHD, SoLuong, GiaBan) VALUES (?, ?, ?, ?, ?)";
 
         try {
             Connection con = DBConnect.getConnection();
@@ -31,6 +31,7 @@ public class ChiTietHDDAO {
             pstm.setInt(2, cthd.getMaSP());
             pstm.setInt(3, cthd.getMaHD());
             pstm.setInt(4, cthd.getSoLuong());
+            pstm.setFloat(5, cthd.getGiaBan());
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -44,8 +45,8 @@ public class ChiTietHDDAO {
                 + "MaCTHD = ?,\n"
                 + "MaSP = ?,\n"
                 + "MaHD = ?,\n"
-                + "SoLuong= ?";
-               
+                + "SoLuong= ?,\n"
+                + "GiaBan= ?";
 
         try {
             Connection con = DBConnect.getConnection();
@@ -54,7 +55,8 @@ public class ChiTietHDDAO {
             pstm.setInt(2, cthd.getMaSP());
             pstm.setInt(3, cthd.getMaHD());
             pstm.setInt(4, cthd.getSoLuong());
-            pstm.setInt(5, maCTHD);
+            pstm.setFloat(5, cthd.getGiaBan());
+            pstm.setInt(6, maCTHD);
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -83,8 +85,9 @@ public class ChiTietHDDAO {
         int maSP = cthd.getMaSP();
         int maHD = cthd.getMaHD();
         int soLuong = cthd.getSoLuong();
+        float giaBan = cthd.getGiaBan();
 
-        Object[] row = new Object[]{maCTHD, maSP, maHD, soLuong};
+        Object[] row = new Object[]{maCTHD, maSP, maHD, soLuong, giaBan};
         return row;
     }
 
@@ -100,7 +103,8 @@ public class ChiTietHDDAO {
                 int maSP = rs.getInt(2);
                 int maHD = rs.getInt(3);
                 int soLuong = rs.getInt(4);
-                ChiTietHD cthd = new ChiTietHD(maCTHD, maSP, maHD, soLuong);
+                float giaBan = rs.getFloat(5);
+                ChiTietHD cthd = new ChiTietHD(maCTHD, maSP, maHD, soLuong, giaBan);
                 listCTHD.add(cthd);
             }
         } catch (Exception ex) {
