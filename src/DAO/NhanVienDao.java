@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class NhanVienDao {
 
-   public int themCTHD(NhanVien nv) {
+    public int themCTHD(NhanVien nv) {
         String sql = "INSERT INTO NhanVien (MaNV, TenTK, HoTen, ChucVu, SDT, Email, DiaChi) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -50,7 +50,8 @@ public class NhanVienDao {
                 + "ChucVu= ?,\n"
                 + "SDT= ?,\n"
                 + "Email= ?,\n"
-                + "DiaChi= ?";
+                + "DiaChi= ?"
+                + "Where MaNV= ?";
 
         try {
             Connection con = DBConnect.getConnection();

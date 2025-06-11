@@ -4,6 +4,8 @@
  */
 package view;
 
+import java.awt.BorderLayout;
+
 /**
  *
  * @author XPS
@@ -77,6 +79,19 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        // TODO add your handling code here:
+        int width = 648;
+        int height = 508;
+        DangNhap p1 = new DangNhap();
+        p1.setSize(width, height); // kichs thuoc = panel goc
+        p1.setLocation(0, 0);
+
+        //b2: de panel vao form
+        jPanel1.setSize(width, height);
+        jPanel1.removeAll();//xoa panel hien tai dang hien thi
+        jPanel1.add(p1, BorderLayout.CENTER);//add them panel moi, hien thi o giua
+        jPanel1.repaint();
+        jPanel1.revalidate();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
