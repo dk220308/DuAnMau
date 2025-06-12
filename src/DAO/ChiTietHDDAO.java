@@ -46,7 +46,8 @@ public class ChiTietHDDAO {
                 + "MaSP = ?,\n"
                 + "MaHD = ?,\n"
                 + "SoLuong= ?,\n"
-                + "GiaBan= ?";
+                + "GiaBan= ?"
+                + "WHERE MaCTHD = ?";    // Thêm khoảng trắng trước WHERE;
 
         try {
             Connection con = DBConnect.getConnection();

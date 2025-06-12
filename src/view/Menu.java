@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setToolTipText("");
 
-        CaPheSua.setIcon(new javax.swing.ImageIcon("D:\\aolen.jpg")); // NOI18N
+        CaPheSua.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Desktop\\DuAnMau\\src\\picture\\aolen.jpg")); // NOI18N
         CaPheSua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CaPheSuaActionPerformed(evt);
@@ -106,7 +106,7 @@ public class Menu extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        CaPheSua1.setIcon(new javax.swing.ImageIcon("D:\\aohoodie.jpg")); // NOI18N
+        CaPheSua1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Desktop\\DuAnMau\\src\\picture\\aobalo.jpg")); // NOI18N
         CaPheSua1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CaPheSua1ActionPerformed(evt);
@@ -161,7 +161,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
-        CaPheSua2.setIcon(new javax.swing.ImageIcon("D:\\aobalo.jpg")); // NOI18N
+        CaPheSua2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Desktop\\DuAnMau\\src\\picture\\aohoodie.jpg")); // NOI18N
         CaPheSua2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CaPheSua2ActionPerformed(evt);
@@ -207,7 +207,7 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
-        CaPheSua4.setIcon(new javax.swing.ImageIcon("D:\\aophong.jpg")); // NOI18N
+        CaPheSua4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Desktop\\DuAnMau\\src\\picture\\aophong.jpg")); // NOI18N
         CaPheSua4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CaPheSua4ActionPerformed(evt);

@@ -4,12 +4,11 @@
  */
 package view;
 
-
 import DAO.ChiTietHDDAO;
 import Model.ChiTietHD;
+import Model.SanPham;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -33,7 +32,7 @@ public class QLHDCT extends javax.swing.JPanel {
         String[] cols = new String[]{"Mã HĐCT", "Mã HĐ", "Mã SP", "Số lượng", "Đơn giá"};
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(cols);
-        jTable1.setModel(tableModel);
+        tb.setModel(tableModel);
     }
 
     public void fillTable() {
@@ -88,6 +87,86 @@ public class QLHDCT extends javax.swing.JPanel {
         return true;
     }
 
+    public void showDetail() {
+        int i = tb.getSelectedRow();
+        if (i >= 0) {
+            ChiTietHD cthd = cthddao.getAll().get(i);
+            TF_MAHDCT.setText(String.valueOf(cthd.getMaCTHD()));
+            TF_MaHD.setText(String.valueOf(cthd.getMaHD()));
+            TF_MaSP.setText(String.valueOf(cthd.getMaSP()));
+            TF_SL.setText(String.valueOf(cthd.getSoLuong()));
+            TF_DG.setText(String.valueOf(cthd.getGiaBan()));
+        }
+    }
+
+    public void them() {
+        int mahdct = Integer.parseInt(TF_MAHDCT.getText());
+        int mahd = Integer.parseInt(TF_MaHD.getText());
+        int masp = Integer.parseInt(TF_MaSP.getText());
+        int soluong = Integer.parseInt(TF_SL.getText());
+        float dongia = Float.parseFloat(TF_DG.getText());
+
+        ChiTietHD cthd = new ChiTietHD();
+
+        int Result = cthddao.themCTHD(cthd);
+        if (Result == 1) {
+            fillTable();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }
+
+    public void sua() {
+        int i = tb.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn sửa",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_OPTION) {  // Đã sửa từ YES_NO_OPTION thành YES_OPTION
+                ChiTietHD cthdcu = cthddao.getAll().get(i);
+                int macu = cthdcu.getMaCTHD();
+
+                int mahdct = Integer.parseInt(TF_MAHDCT.getText());
+                int mahd = Integer.parseInt(TF_MaHD.getText());
+                int masp = Integer.parseInt(TF_MaSP.getText());
+                int soluong = Integer.parseInt(TF_SL.getText());
+                float dongia = Float.parseFloat(TF_DG.getText());
+
+                ChiTietHD cthdmoi = new ChiTietHD(mahd, masp, mahd, soluong , dongia);
+                int result = cthddao.suaCTHD(cthdmoi, macu);
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để sửa");
+        }
+    }
+
+    public void xoa() {
+        int i = tb.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xoá",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_NO_OPTION) {
+                ChiTietHD cthdcu = cthddao.getAll().get(i);
+                int result = cthddao.xoaCTHD(cthdcu.getMaSP());
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xóa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa"
+                            + "2 thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để xoá");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -112,7 +191,7 @@ public class QLHDCT extends javax.swing.JPanel {
         Button_Sua = new javax.swing.JButton();
         Button_Xoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tb = new javax.swing.JTable();
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 255));
@@ -157,7 +236,7 @@ public class QLHDCT extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -168,7 +247,7 @@ public class QLHDCT extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tb);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,6 +362,6 @@ public class QLHDCT extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tb;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,9 @@
 package view;
 
 import DAO.HoaDonDAO;
+import Model.ChiTietHD;
 import Model.HoaDon;
+import java.sql.Date;
 //import dao.HoaDonDao;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +32,7 @@ public class QLHD extends javax.swing.JPanel {
     }
  
     public void initTable() {
-        String[] cols = new String[]{"Mã HĐ", "Mã SP", "Tên SP", "Giá tiền", "Mã KH", "Mã NV"};
+        String[] cols = new String[]{"Mã HĐ", "Mã KH", "Mã NV", "Ngày lập", "Trạng thái", "Tổng tiền"};
         tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(cols);
         jTable2.setModel(tableModel);
@@ -96,6 +98,95 @@ public class QLHD extends javax.swing.JPanel {
     }
     return true;
 }
+ 
+    public void showDetail(){
+        int i = jTable2.getSelectedRow();
+        if(i >= 0) {
+            HoaDon hd = hdDao.getAll().get(i);
+            TF_MaHD.setText(String.valueOf(hd.getMaHD()));
+            TF_MaKH.setText(String.valueOf(hd.getMaKH()));
+            TF_MaNV.setText(String.valueOf(hd.getMaNV()));
+            TF_NgayLap.setText(String.valueOf(hd.getNgayLap()));
+            TF_Gia.setText(String.valueOf(hd.getTongTien()));
+            TF_TrangThai.setText(hd.getTrangThai());
+            
+        }
+    }
+// Trong QLSPpanel.java
+    public void sua() {
+        int i = jTable2.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn sửa",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_OPTION) {  // Đã sửa từ YES_NO_OPTION thành YES_OPTION
+                HoaDon hdcu = hdDao.getAll().get(i);
+                int macu = hdcu.getMaHD();
+
+                int mahd = Integer.parseInt(TF_MaHD.getText());
+                int makh = Integer.parseInt(TF_MaKH.getText());
+                int manv = Integer.parseInt(TF_MaNV.getText());
+                Date ngayLap = Date.valueOf(TF_NgayLap.getText());
+                String tthai = TF_TrangThai.getText();
+                float tongTien = Float.parseFloat(TF_Gia.getText()  );
+                
+
+                HoaDon hdmoi = new HoaDon(mahd, makh, manv, ngayLap, tthai, tongTien);
+                int result = hdDao.suaHD(hdmoi, macu);
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Sửa thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để sửa");
+        }
+    }
+
+    public void them() {
+         int mahd = Integer.parseInt(TF_MaHD.getText());
+                int makh = Integer.parseInt(TF_MaKH.getText());
+                int manv = Integer.parseInt(TF_MaNV.getText());
+                Date ngayLap = Date.valueOf(TF_NgayLap.getText());
+                String tthai = TF_TrangThai.getText();
+                float tongTien = Float.parseFloat(TF_Gia.getText());
+                
+                HoaDon hd = new HoaDon(mahd, makh, manv, ngayLap, tthai, tongTien);
+
+        int Result = hdDao.themHD(hd);
+        if (Result == 1) {
+            fillTable();
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm thất bại");
+        }
+    }
+
+    public void xoa() {
+        int i = jTable1.getSelectedRow();
+        if (i >= 0) {
+            int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xoá",
+                    "Xác nhận", JOptionPane.YES_NO_OPTION);
+            if (chon == JOptionPane.YES_NO_OPTION) {
+                HoaDon hdcu = hdDao.getAll().get(i);
+                int result = hdDao.xoaHD(hdcu.getMaHD());
+                if (result == 1) {
+                    fillTable();
+                    JOptionPane.showMessageDialog(this, "Xoá thành công");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xoá thất bại");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn sản phẩm để xoá");
+        }
+    }
+
+ 
+ 
+ 
+    
 
 
     /**
