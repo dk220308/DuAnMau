@@ -11,6 +11,7 @@ package Model;
 public class ChiTIetSP {
     private int maCTSP;
     private int maSP;
+    private String tenSP;
     private String kichThuoc;
     private String mauSac;
     private double gia;
@@ -19,9 +20,10 @@ public class ChiTIetSP {
     public ChiTIetSP() {
     }
 
-    public ChiTIetSP(int maCTSP, int maSP, String kichThuoc, String mauSac, double gia, int soLuong) {
+    public ChiTIetSP(int maCTSP, int maSP, String tenSP, String kichThuoc, String mauSac, double gia, int soLuong) {
         this.maCTSP = maCTSP;
         this.maSP = maSP;
+        this.tenSP = tenSP;
         this.kichThuoc = kichThuoc;
         this.mauSac = mauSac;
         this.gia = gia;
@@ -42,6 +44,14 @@ public class ChiTIetSP {
 
     public void setMaSP(int maSP) {
         this.maSP = maSP;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public String getKichThuoc() {

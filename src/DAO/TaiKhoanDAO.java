@@ -20,8 +20,11 @@ import java.util.List;
  */
 public class TaiKhoanDAO {
 
+    List<TaiKhoan> listtk = new ArrayList<>();
+
+    
     public int themTK(TaiKhoan tk) {
-        String sql = "INSERT INTO TaiKhoan (TenTK, MatKhau, MaNV) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO TaiKhoan (TenTK, MatKhau, MaNV, VaiTro) VALUES (?, ?, ?, ?)";
 
         try {
             Connection con = DBConnect.getConnection();
@@ -29,6 +32,7 @@ public class TaiKhoanDAO {
             pstm.setString(1, tk.getTenTK());
             pstm.setString(2, tk.getMatKhau());
             pstm.setInt(3, tk.getMaNV());
+            pstm.setString(4, tk.getVaitro());
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -56,6 +60,7 @@ public class TaiKhoanDAO {
         String tenTK = tk.getTenTK();
         String matKhau = tk.getMatKhau();
         int maTK = tk.getMaNV();
+        String vaitro = tk.getVaitro();
 
         Object[] row = new Object[]{tenTK, matKhau, maTK};
         return row;
@@ -72,7 +77,8 @@ public class TaiKhoanDAO {
                 String tenTK = rs.getString(1);
                 String matKhau = rs.getString(2);
                 int maTK = rs.getInt(3);
-                TaiKhoan tk = new TaiKhoan(tenTK, matKhau, maTK);
+                String vaitro = rs.getString(4);
+                TaiKhoan tk = new TaiKhoan(tenTK, matKhau, maTK, vaitro);
                 listtk.add(tk);
             }
         } catch (Exception ex) {
@@ -80,4 +86,29 @@ public class TaiKhoanDAO {
 
         return listtk;
     }
+
+    public int checkUser(String tenTK, String matKhau) {
+    String sql = "SELECT VaiTro FROM TaiKhoan WHERE TenTK = ? AND MatKhau = ?";
+    
+    try (Connection con = DBConnect.getConnection();
+         PreparedStatement pstm = con.prepareStatement(sql)) {
+        
+        pstm.setString(1, tenTK);
+        pstm.setString(2, matKhau);
+        
+        try (ResultSet rs = pstm.executeQuery()) {
+            if (rs.next()) {
+                String vaitro = rs.getString("VaiTro");
+                if ("quanly".equalsIgnoreCase(vaitro)) {
+                    return 1;
+                } else if ("nhanvien".equalsIgnoreCase(vaitro)) {
+                    return -1;
+                }
+            }
+        }
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+    return 0;
+}
 }

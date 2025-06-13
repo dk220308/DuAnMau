@@ -5,6 +5,7 @@
 package Model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -19,7 +20,7 @@ public class HoaDon {
     private String trangThai;
     private double tongTien;
 
-    public HoaDon() {
+    public HoaDon(int mahd, int makh, int manv, LocalDate ngayLap1, String tthai, float tongTien1) {
     }
 
     public HoaDon(int maHD, int maKH, int maNV, Date ngayLap, String trangThai, double tongTien) {

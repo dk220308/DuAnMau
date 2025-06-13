@@ -21,17 +21,18 @@ import java.util.List;
 public class ChiTietSPDAO {
 
     public int themCTHD(ChiTIetSP ctsp) {
-        String sql = "INSERT INTO ChiTietSanPham (MaCTSP, MaSP, Size, MauSac, Gia, SoLuongTon) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ChiTietSanPham (MaCTSP, MaSP, TenSP, Size, MauSac, Gia, SoLuongTon) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             Connection con = DBConnect.getConnection();
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, ctsp.getMaCTSP());
             pstm.setInt(2, ctsp.getMaSP());
-            pstm.setString(3, ctsp.getKichThuoc());
-            pstm.setString(4, ctsp.getMauSac());
-            pstm.setDouble(5, ctsp.getGia());
-            pstm.setInt(6, ctsp.getSoLuong());
+            pstm.setString(3, ctsp.getTenSP());
+            pstm.setString(4, ctsp.getKichThuoc());
+            pstm.setString(5, ctsp.getMauSac());
+            pstm.setDouble(6, ctsp.getGia());
+            pstm.setInt(7, ctsp.getSoLuong());
 
             if (pstm.executeUpdate() > 0) {
                 return 1;
@@ -45,6 +46,7 @@ public class ChiTietSPDAO {
         String sql = "update ChiTietSanPham set\n"
                 + "MaCTSP = ?,\n"
                 + "MaSP = ?,\n"
+                + "TenSP = ?,\n"
                 + "Size = ?,\n"
                 + "MauSac= ?,\n"
                 + "Gia= ?,\n"
@@ -54,11 +56,12 @@ public class ChiTietSPDAO {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, ctsp.getMaCTSP());
             pstm.setInt(2, ctsp.getMaSP());
-            pstm.setString(3, ctsp.getKichThuoc());
-            pstm.setString(4, ctsp.getMauSac());
-            pstm.setDouble(5, ctsp.getGia());
-            pstm.setInt(6, ctsp.getSoLuong());
-            pstm.setInt(7, maCTSP);
+            pstm.setString(3, ctsp.getTenSP());
+            pstm.setString(4, ctsp.getKichThuoc());
+            pstm.setString(5, ctsp.getMauSac());
+            pstm.setDouble(6, ctsp.getGia());
+            pstm.setInt(7, ctsp.getSoLuong());
+            pstm.setInt(8, maCTSP);
             if (pstm.executeUpdate() > 0) {
                 return 1;
             }
@@ -85,12 +88,13 @@ public class ChiTietSPDAO {
     public Object[] getRow(ChiTIetSP ctsp) {
         int maCTSP = ctsp.getMaCTSP();
         int maSP = ctsp.getMaSP();
+        String ten = ctsp.getTenSP();
         String kichThuoc = ctsp.getKichThuoc();
         String mauSac = ctsp.getMauSac();
         double gia = ctsp.getGia();
         int soLuong = ctsp.getSoLuong();
 
-        Object[] row = new Object[]{maCTSP, maSP, kichThuoc, mauSac, gia, soLuong};
+        Object[] row = new Object[]{maCTSP, maSP, ten, kichThuoc, mauSac, gia, soLuong};
         return row;
     }
 
@@ -104,11 +108,12 @@ public class ChiTietSPDAO {
             while (rs.next()) {
                 int maCTSP = rs.getInt(1);
                 int maSP = rs.getInt(2);
-                String kichThuoc = rs.getString(3);
-                String mauSac = rs.getString(4);
-                double gia = rs.getDouble(5);
-                int soLuong = rs.getInt(6);
-                ChiTIetSP ctsp = new ChiTIetSP(maCTSP, maSP, kichThuoc, mauSac, gia, soLuong);
+                String ten = rs.getString(3);
+                String kichThuoc = rs.getString(4);
+                String mauSac = rs.getString(5);
+                double gia = rs.getDouble(6);
+                int soLuong = rs.getInt(7);
+                ChiTIetSP ctsp = new ChiTIetSP(maCTSP, maSP, ten, kichThuoc, mauSac, gia, soLuong);
                 listctsp.add(ctsp);
             }
         } catch (Exception ex) {

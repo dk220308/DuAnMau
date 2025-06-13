@@ -20,6 +20,23 @@ import java.util.List;
  */
 public class HoaDonDAO {
 
+    public int taoMaHoaDonMoi() {
+    int maMoi = 1;
+    try (Connection conn = DBConnect.getConnection()) {
+        String sql = "SELECT MAX(MaHD) AS MaxMa FROM HoaDon";
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) {
+            int maCu = rs.getInt("MaxMa");
+            maMoi = maCu + 1;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return maMoi;
+}
+
+    
     public int themHD(HoaDon hd) {
         String sql = "INSERT INTO HoaDon (MaHD, MaKH, MaNV, NgayLap, TrangThai, TongTien) VALUES (?, ?, ?, ?, ?, ?)";
 
